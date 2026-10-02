@@ -816,7 +816,7 @@
 
         const status = getPaidStatus(t.paid, t.money);
         let paidBtnClass = 'paid-btn';
-        let paidBtnText = '💰 Оплачена';
+        let paidBtnText = '💰 Оплачено';
         if (status === 'match') { paidBtnClass += ' status-match'; paidBtnText = `✅ ${t.paid} руб.`; }
         else if (status === 'less') { paidBtnClass += ' status-less'; paidBtnText = `⬇ ${t.paid} руб.`; }
         else if (status === 'more') { paidBtnClass += ' status-more'; paidBtnText = `⬆ ${t.paid} руб.`; }
