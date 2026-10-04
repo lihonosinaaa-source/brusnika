@@ -4,35 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
-<title>График смен</title>
+<title>График брусники</title>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
 
     body {
         min-height: 100vh;
-        background-color: #f7e9e9;
-        background-image: url('https://e.radikal.host/2026/10/02/IMG_4283.png');
+        background-color: #1a2a0a;
+        background-image: url('https://e.radikal.host/2026/10/01/IMG_4280.png');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
         background-repeat: no-repeat;
         padding: 30px 15px;
-        color: #5a2a2a;
+        color: #fff;
     }
 
-    /* ===== Лёгкое затемнение фона (фото хорошо видно) ===== */
     body::before {
         content: '';
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(255, 235, 235, 0.18);
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
+        background: rgba(20, 40, 10, 0.4);
+        backdrop-filter: blur(2px);
         z-index: -1;
     }
 
@@ -41,69 +34,71 @@
         font-weight: 300;
         letter-spacing: 2px;
         margin-bottom: 22px;
-        color: #7a2f2f;
-        text-shadow: 0 2px 10px rgba(255,255,255,0.8);
+        text-shadow: 0 2px 10px rgba(0,0,0,0.6);
         font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
     }
 
-    .main-container {
-        max-width: 720px;
-        margin: 0 auto;
-    }
+    h1 svg { width: 30px; height: 30px; }
 
-    /* ===== Кнопки ===== */
+    .main-container { max-width: 720px; margin: 0 auto; }
+
+    .icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .icon-sm { width: 14px; height: 14px; }
+
     .btn {
-        background: rgba(255, 255, 255, 0.55);
-        border: 1px solid rgba(200, 120, 120, 0.5);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        color: #7a2f2f;
-        padding: 12px 22px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: #fff;
+        padding: 11px 20px;
         border-radius: 14px;
         cursor: pointer;
-        font-size: 15px;
-        font-weight: 600;
-        transition: all 0.25s ease;
-        box-shadow: 0 4px 20px rgba(200, 120, 120, 0.25);
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 20px rgba(0, 40, 10, 0.25);
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 7px;
     }
 
     .btn:hover {
-        background: rgba(255, 255, 255, 0.85);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(200, 120, 120, 0.4);
+        background: rgba(255, 255, 255, 0.28);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 22px rgba(0, 80, 20, 0.4);
     }
 
     .btn:active { transform: translateY(0); }
 
-    /* ===== Выбор месяца ===== */
     .month-selector {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px;
-        background: rgba(255, 255, 255, 0.5);
-        border: 1px solid rgba(200, 120, 120, 0.4);
-        backdrop-filter: blur(14px);
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.13);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
         border-radius: 18px;
-        padding: 12px 18px;
+        padding: 10px 16px;
         margin: 0 auto 20px;
         max-width: 420px;
-        box-shadow: 0 6px 24px rgba(200, 120, 120, 0.2);
+        box-shadow: 0 6px 24px rgba(0, 40, 10, 0.25);
     }
 
     .month-arrow {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(200, 120, 120, 0.4);
-        color: #7a2f2f;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
         cursor: pointer;
-        font-size: 20px;
-        font-weight: 700;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -111,143 +106,159 @@
     }
 
     .month-arrow:hover {
-        background: #fff;
-        transform: scale(1.08);
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
     }
 
     .month-name {
         flex: 1;
         text-align: center;
-        font-size: 20px;
-        font-weight: 700;
-        color: #7a2f2f;
-        letter-spacing: 1px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #e8f2ff;
+        letter-spacing: 0.5px;
         user-select: none;
     }
 
     .btn-create-week {
         display: block;
         margin: 0 auto 25px;
-        font-size: 17px;
-        padding: 14px 30px;
+        font-size: 16px;
+        padding: 12px 28px;
     }
 
-    .hidden { display: none !important; }
-
-    /* ===== Неделя ===== */
     .week-block {
-        background: rgba(255, 255, 255, 0.5);
-        border: 1px solid rgba(200, 120, 120, 0.4);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border-radius: 22px;
-        padding: 18px;
-        margin-bottom: 22px;
-        box-shadow: 0 8px 32px rgba(200, 120, 120, 0.25);
+        border-radius: 20px;
+        padding: 16px;
+        margin-bottom: 18px;
+        box-shadow: 0 8px 32px rgba(0, 40, 10, 0.3);
     }
 
     .week-block.closed {
-        border-color: rgba(120, 200, 140, 0.6);
-        box-shadow: 0 8px 32px rgba(120, 200, 140, 0.25);
+        border-color: rgba(180, 255, 140, 0.5);
+        box-shadow: 0 8px 32px rgba(60, 200, 60, 0.25);
+        padding: 12px 16px;
     }
 
     .week-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 15px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid rgba(200, 120, 120, 0.25);
-        flex-wrap: wrap;
         gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .week-block:not(.closed) .week-header {
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
     }
 
     .week-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: #7a2f2f;
+        font-size: 16px;
+        font-weight: 600;
+        color: #e8f2ff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
-    .week-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .week-summary {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        flex-wrap: wrap;
+    }
 
-    .btn-small {
-        padding: 7px 14px;
+    .summary-item {
         font-size: 13px;
-        border-radius: 10px;
+        color: #cfe4ff;
+        background: rgba(100, 170, 255, 0.18);
+        padding: 4px 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(150, 200, 255, 0.3);
+        white-space: nowrap;
+    }
+
+    .summary-item.green {
+        color: #b6ffd0;
+        background: rgba(60, 220, 130, 0.2);
+        border-color: rgba(120, 255, 180, 0.4);
+    }
+
+    .week-actions { display: flex; gap: 6px; }
+
+    .btn-small { padding: 7px 12px; font-size: 13px; border-radius: 10px; }
+
+    .btn-icon {
+        padding: 6px 8px;
+        font-size: 13px;
+        border-radius: 9px;
+        min-width: 32px;
+        justify-content: center;
     }
 
     .btn-danger {
-        background: rgba(255, 180, 180, 0.55);
-        border-color: rgba(230, 120, 120, 0.6);
-        color: #8a2a2a;
+        background: rgba(255, 80, 80, 0.22);
+        border-color: rgba(255, 120, 120, 0.5);
     }
 
-    .btn-danger:hover { background: rgba(255, 160, 160, 0.85); }
+    .btn-danger:hover { background: rgba(255, 80, 80, 0.45); }
 
     .btn-finish {
-        background: rgba(255, 210, 210, 0.6);
-        border-color: rgba(220, 140, 140, 0.6);
+        background: rgba(100, 200, 255, 0.22);
+        border-color: rgba(140, 220, 255, 0.5);
     }
 
-    .btn-finish:hover { background: rgba(255, 190, 190, 0.9); }
+    .btn-finish:hover { background: rgba(100, 200, 255, 0.42); }
 
-    .btn-finish.finished {
-        background: rgba(180, 240, 200, 0.7);
-        border-color: rgba(120, 220, 150, 0.7);
-        color: #1e6b3a;
-    }
-
-    /* ===== Плитка добавления дня ===== */
     .add-day-tile {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 56px;
-        height: 56px;
-        border-radius: 16px;
-        background: rgba(255, 200, 200, 0.5);
-        border: 2px dashed rgba(200, 100, 100, 0.6);
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(100, 170, 255, 0.18);
+        border: 2px dashed rgba(255, 255, 255, 0.5);
         cursor: pointer;
-        font-size: 30px;
-        color: #8a2a2a;
+        color: #fff;
         transition: all 0.25s ease;
         backdrop-filter: blur(10px);
     }
 
     .add-day-tile:hover {
-        background: rgba(255, 180, 180, 0.75);
-        transform: scale(1.07) rotate(90deg);
-        border-color: #8a2a2a;
+        background: rgba(100, 170, 255, 0.38);
+        transform: scale(1.06);
+        border-color: #fff;
     }
 
     .days-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
         align-items: flex-start;
     }
 
-    /* ===== Карточка дня ===== */
     .day-card {
         width: 100%;
-        background: rgba(255, 255, 255, 0.55);
-        border: 1px solid rgba(200, 120, 120, 0.35);
+        background: rgba(255, 255, 255, 0.13);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
-        border-radius: 18px;
-        padding: 14px;
-        box-shadow: 0 6px 24px rgba(200, 120, 120, 0.2);
-        animation: fadeIn 0.3s ease;
+        border-radius: 16px;
+        padding: 12px 14px;
+        box-shadow: 0 6px 24px rgba(0, 40, 10, 0.22);
+        animation: fadeIn 0.25s ease;
     }
-
-    .day-card.collapsed {
-        padding: 10px 14px;
-    }
-
-    .day-card.collapsed .day-body { display: none; }
 
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(8px); }
+        from { opacity: 0; transform: translateY(6px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
@@ -258,123 +269,153 @@
         gap: 8px;
     }
 
-    .day-card:not(.collapsed) .day-top {
-        margin-bottom: 10px;
-    }
+    .day-card:not(.collapsed) .day-top { margin-bottom: 10px; }
 
-    .day-number-input {
-        background: rgba(255, 255, 255, 0.75);
-        border: 1px solid rgba(200, 120, 120, 0.4);
-        border-radius: 9px;
-        color: #5a2a2a;
-        padding: 6px 10px;
-        font-size: 14px;
-        width: 95px;
-        outline: none;
-        transition: 0.2s;
-    }
-
-    .day-number-input::placeholder { color: rgba(140, 80, 80, 0.55); }
-
-    .day-number-input:focus {
-        border-color: #d68a8a;
-        background: #fff;
-        box-shadow: 0 0 0 3px rgba(220, 140, 140, 0.25);
+    .day-date-badge {
+        background: rgba(100, 170, 255, 0.25);
+        border: 1px solid rgba(150, 200, 255, 0.4);
+        color: #fff;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
     }
 
     .day-summary {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         flex: 1;
-        font-size: 13px;
-        color: #8a5a5a;
-        font-weight: 600;
-        padding-left: 4px;
+        flex-wrap: wrap;
     }
 
-    .day-top-btns { display: flex; gap: 6px; }
+    .day-top-btns { display: flex; gap: 5px; }
 
     .icon-btn {
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(200, 120, 120, 0.4);
-        color: #7a2f2f;
-        width: 32px;
-        height: 32px;
-        border-radius: 9px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.25);
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
         cursor: pointer;
-        font-size: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: 0.2s;
     }
 
-    .icon-btn:hover { background: #fff; transform: scale(1.05); }
+    .icon-btn:hover { background: rgba(255,255,255,0.28); }
 
-    /* ===== Строка часов ===== */
+    .date-picker {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.28);
+        border-radius: 10px;
+        padding: 3px 6px;
+    }
+
+    .date-picker button {
+        background: transparent;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        padding: 2px 6px;
+        font-size: 14px;
+        border-radius: 6px;
+        transition: 0.15s;
+        display: flex;
+        align-items: center;
+    }
+
+    .date-picker button:hover { background: rgba(255,255,255,0.18); }
+
+    .date-picker-value {
+        min-width: 58px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        padding: 3px 4px;
+        user-select: none;
+    }
+
     .shift-row {
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 10px 0;
+        gap: 8px;
+        padding: 7px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .hours-input {
-        width: 90px;
-        background: rgba(255, 255, 255, 0.75);
-        border: 1px solid rgba(200, 120, 120, 0.4);
+    .shift-row:last-of-type { border-bottom: none; }
+
+    .shift-label {
+        width: 62px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #cfe4ff;
+        flex-shrink: 0;
+    }
+
+    .cars-input {
+        width: 75px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.28);
         border-radius: 9px;
-        color: #5a2a2a;
-        padding: 8px 10px;
-        font-size: 15px;
+        color: #fff;
+        padding: 7px 9px;
+        font-size: 14px;
         text-align: center;
         outline: none;
         transition: 0.2s;
         -moz-appearance: textfield;
-        font-weight: 600;
     }
 
-    .hours-input::-webkit-outer-spin-button,
-    .hours-input::-webkit-inner-spin-button {
+    .cars-input::-webkit-outer-spin-button,
+    .cars-input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
 
-    .hours-input:focus {
-        border-color: #d68a8a;
-        background: #fff;
-        box-shadow: 0 0 0 3px rgba(220, 140, 140, 0.25);
+    .cars-input:focus {
+        border-color: #a3d977;
+        background: rgba(255,255,255,0.22);
+        box-shadow: 0 0 0 3px rgba(140, 220, 100, 0.25);
     }
 
-    .hours-word {
-        font-size: 14px;
-        color: #8a5a5a;
-        font-weight: 600;
+    .cars-word {
+        font-size: 13px;
+        color: rgba(255,255,255,0.75);
         flex-shrink: 0;
     }
 
     .money {
         margin-left: auto;
-        font-weight: 700;
-        color: #b05050;
-        font-size: 16px;
+        font-weight: 600;
+        color: #c9f0a8;
+        font-size: 15px;
         white-space: nowrap;
     }
 
-    /* ===== Итого дня ===== */
     .total-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 6px;
-        padding-top: 12px;
-        border-top: 1px solid rgba(200, 120, 120, 0.3);
+        margin-top: 8px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255,255,255,0.25);
         gap: 8px;
         flex-wrap: wrap;
     }
 
     .total-label {
         font-size: 14px;
-        font-weight: 700;
-        color: #7a2f2f;
+        font-weight: 600;
+        color: #e8f2ff;
     }
 
     .total-block {
@@ -382,85 +423,75 @@
         align-items: center;
         gap: 6px;
         margin-left: auto;
+        flex-wrap: wrap;
     }
 
     .total-value {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 700;
-        color: #7a2f2f;
-        background: rgba(255, 210, 210, 0.7);
-        padding: 5px 14px;
-        border-radius: 10px;
-        border: 1px solid rgba(220, 140, 140, 0.5);
+        color: #fff;
+        background: rgba(100, 170, 255, 0.3);
+        padding: 4px 12px;
+        border-radius: 9px;
+        border: 1px solid rgba(150, 200, 255, 0.4);
         white-space: nowrap;
     }
 
     .total-money {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 700;
-        color: #1e6b3a;
-        background: rgba(200, 245, 215, 0.7);
-        padding: 5px 14px;
-        border-radius: 10px;
-        border: 1px solid rgba(120, 220, 150, 0.6);
+        color: #b6ffd0;
+        background: rgba(60, 220, 130, 0.25);
+        padding: 4px 12px;
+        border-radius: 9px;
+        border: 1px solid rgba(120, 255, 180, 0.5);
         white-space: nowrap;
     }
 
     .paid-btn {
-        font-size: 14px;
-        font-weight: 700;
+        font-size: 13px;
+        font-weight: 600;
         color: #fff;
-        background: rgba(180, 130, 130, 0.75);
-        padding: 6px 14px;
-        border-radius: 10px;
-        border: 1px solid rgba(150, 100, 100, 0.6);
+        background: rgba(100, 170, 255, 0.3);
+        padding: 5px 12px;
+        border-radius: 9px;
+        border: 1px solid rgba(150, 200, 255, 0.4);
         cursor: pointer;
-        transition: all 0.25s ease;
+        transition: all 0.2s ease;
         white-space: nowrap;
     }
 
-    .paid-btn:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.08);
-    }
+    .paid-btn:hover { transform: translateY(-1px); filter: brightness(1.15); }
 
     .paid-btn.status-match {
-        background: rgba(80, 210, 130, 0.85);
-        border-color: rgba(60, 190, 110, 0.95);
-        box-shadow: 0 0 14px rgba(80, 210, 130, 0.55);
+        background: rgba(60, 220, 130, 0.55);
+        border-color: rgba(120, 255, 180, 0.85);
+        box-shadow: 0 0 12px rgba(60, 220, 130, 0.5);
     }
 
     .paid-btn.status-less {
-        background: rgba(240, 90, 90, 0.85);
-        border-color: rgba(220, 70, 70, 0.95);
-        box-shadow: 0 0 14px rgba(240, 90, 90, 0.55);
+        background: rgba(255, 70, 70, 0.55);
+        border-color: rgba(255, 130, 130, 0.85);
+        box-shadow: 0 0 12px rgba(255, 70, 70, 0.5);
     }
 
     .paid-btn.status-more {
-        background: rgba(180, 120, 240, 0.85);
-        border-color: rgba(160, 100, 220, 0.95);
-        box-shadow: 0 0 14px rgba(180, 120, 240, 0.55);
+        background: rgba(170, 90, 255, 0.55);
+        border-color: rgba(210, 150, 255, 0.85);
+        box-shadow: 0 0 12px rgba(170, 90, 255, 0.5);
     }
 
-    /* ===== Примечания ===== */
-    .notes-block {
-        margin-top: 10px;
-        display: none;
-    }
-
-    .notes-block.open {
-        display: block;
-        animation: fadeIn 0.25s ease;
-    }
+    .notes-block { margin-top: 10px; display: none; }
+    .notes-block.open { display: block; animation: fadeIn 0.2s ease; }
 
     .notes-textarea {
         width: 100%;
-        min-height: 70px;
+        min-height: 65px;
         resize: vertical;
-        background: rgba(255, 255, 255, 0.75);
-        border: 1px solid rgba(200, 120, 120, 0.4);
-        border-radius: 12px;
-        color: #5a2a2a;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.28);
+        border-radius: 11px;
+        color: #fff;
         padding: 10px;
         font-size: 13px;
         outline: none;
@@ -468,144 +499,160 @@
         transition: 0.2s;
     }
 
-    .notes-textarea::placeholder { color: rgba(140, 80, 80, 0.55); }
+    .notes-textarea::placeholder { color: rgba(255,255,255,0.5); }
 
     .notes-textarea:focus {
-        border-color: #d68a8a;
-        background: #fff;
-        box-shadow: 0 0 0 3px rgba(220, 140, 140, 0.25);
+        border-color: #a3d977;
+        background: rgba(255,255,255,0.2);
+        box-shadow: 0 0 0 3px rgba(140, 220, 100, 0.25);
     }
 
-    .notes-indicator { color: #d17a00; }
-
-    /* ===== Итог недели ===== */
     .week-total {
-        margin-top: 15px;
+        margin-top: 14px;
         padding: 14px;
-        border-radius: 16px;
-        background: rgba(255, 230, 230, 0.7);
-        border: 1px solid rgba(220, 140, 140, 0.5);
+        border-radius: 14px;
+        background: rgba(60, 220, 130, 0.15);
+        border: 1px solid rgba(120, 255, 180, 0.45);
         backdrop-filter: blur(12px);
-        animation: fadeIn 0.35s ease;
+        animation: fadeIn 0.3s ease;
     }
 
     .week-total-title {
-        font-size: 15px;
-        font-weight: 700;
-        color: #7a2f2f;
+        font-size: 14px;
+        font-weight: 600;
+        color: #d6ffe8;
         margin-bottom: 10px;
     }
 
-    .week-total-row {
+    .total-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 14px;
+    }
+
+    .total-line {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 10px;
+        gap: 12px;
+        padding: 2px 0;
     }
 
-    .week-total-amount {
-        font-size: 18px;
-        font-weight: 800;
-        color: #1e6b3a;
-        background: rgba(200, 245, 215, 0.8);
-        padding: 6px 16px;
-        border-radius: 12px;
-        border: 1px solid rgba(120, 220, 150, 0.6);
-    }
+    .total-line .k { color: rgba(255,255,255,0.85); }
 
-    .week-total-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px 18px;
-        font-size: 14px;
-    }
-
-    .week-total-grid .k { color: #8a5a5a; }
-
-    .week-total-grid .v {
-        color: #5a2a2a;
+    .total-line .v {
+        color: #fff;
         font-weight: 700;
         text-align: right;
+        white-space: nowrap;
     }
+
+    .total-line .v.highlight { color: #b6ffd0; font-size: 15px; }
 
     .empty-text {
         text-align: center;
-        color: rgba(140, 80, 80, 0.75);
-        font-size: 14px;
-        padding: 20px;
-        font-style: italic;
-    }
-
-    .month-empty {
-        text-align: center;
-        color: rgba(140, 80, 80, 0.75);
+        color: rgba(255,255,255,0.7);
         font-size: 14px;
         padding: 24px;
         font-style: italic;
     }
 
     @media (max-width: 480px) {
-        .hours-input { width: 70px; }
-        .hours-word { font-size: 13px; }
+        .shift-label { width: 52px; font-size: 13px; }
+        .cars-input { width: 62px; }
+        .cars-word { font-size: 12px; }
         .money { font-size: 14px; }
-        .week-title { font-size: 15px; }
-        .week-total-grid { grid-template-columns: 1fr; }
-        .total-value, .total-money { font-size: 13px; padding: 4px 10px; }
-        .month-name { font-size: 17px; }
+        .week-title { font-size: 14px; }
+        .total-value, .total-money { font-size: 12px; padding: 3px 8px; }
+        .month-name { font-size: 16px; }
+        .day-date-badge { font-size: 12px; padding: 4px 9px; }
+        .total-line { font-size: 13px; }
     }
 </style>
 </head>
 <body>
 
-<h1>📅 График смен</h1>
+<h1>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2C8 2 5 5 5 9c0 3 2 5 3 6v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-5c1-1 3-3 3-6 0-4-3-7-7-7z"></path>
+        <path d="M12 2v6"></path>
+    </svg>
+    График брусники
+</h1>
 
 <div class="main-container">
-    <!-- Выбор месяца -->
+
     <div class="month-selector">
-        <button class="month-arrow" onclick="changeMonth(-1)" title="Предыдущий месяц">‹</button>
+        <button class="month-arrow" onclick="changeMonth(-1)" title="Предыдущий месяц">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
         <div class="month-name" id="monthName">—</div>
-        <button class="month-arrow" onclick="changeMonth(1)" title="Следующий месяц">›</button>
+        <button class="month-arrow" onclick="changeMonth(1)" title="Следующий месяц">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
     </div>
 
-    <!-- Кнопка создания недели -->
-    <button class="btn btn-create-week hidden" id="createWeekBtn" onclick="createWeek()">➕ Добавить неделю</button>
+    <button class="btn btn-create-week" onclick="createWeek()">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Создать неделю
+    </button>
 
     <div id="weeksContainer"></div>
 </div>
 
 <script>
-    const STORAGE_KEY = 'shiftScheduleData_v2';
+    const STORAGE_KEY = 'brusnikaScheduleData_v1';
     const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь',
                     'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-    const HOUR_RATE = 300;
+    const RATE = 300;   // ставка за единицу (можете поменять)
 
-    let data = {
-        currentMonthIndex: new Date().getMonth(),
-        weeks: []
-    };
-
+    let data = { currentMonthIndex: new Date().getMonth(), weeks: [] };
     let weekCounter = 0;
     let dayCounter = 0;
+
+    const ICONS = {
+        chevronLeft:  '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>',
+        chevronRight: '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>',
+        chevronDown:  '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>',
+        plus:         '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
+        trash:        '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg>',
+        check:        '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+        checkCircle:  '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',
+        note:         '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>',
+        wallet:       '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"></path><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4z"></path></svg>',
+        flag:         '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>',
+        calendar:     '<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>'
+    };
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function today() { const d = new Date(); return { d: d.getDate(), m: d.getMonth() + 1, y: d.getFullYear() }; }
+    function formatDate(day, month) { return pad(day) + '.' + pad(month); }
 
     function loadData() {
         try {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) {
                 data = JSON.parse(saved);
-                if (typeof data.currentMonthIndex !== 'number') {
-                    data.currentMonthIndex = new Date().getMonth();
-                }
+                if (typeof data.currentMonthIndex !== 'number') data.currentMonthIndex = new Date().getMonth();
                 if (!Array.isArray(data.weeks)) data.weeks = [];
                 data.weeks.forEach(w => {
                     if (typeof w.closed === 'undefined') w.closed = false;
+                    if (typeof w.paid === 'undefined') w.paid = null;
                     if (typeof w.monthIndex === 'undefined') w.monthIndex = data.currentMonthIndex;
                     weekCounter = Math.max(weekCounter, w.id + 1);
                     w.days.forEach(d => {
                         if (typeof d.paid === 'undefined') d.paid = null;
-                        if (typeof d.collapsed === 'undefined') d.collapsed = false;
-                        if (typeof d.hours === 'undefined') d.hours = 0;
+                        if (typeof d.closed === 'undefined') d.closed = false;
+                        if (typeof d.dayNum === 'undefined') d.dayNum = null;
+                        if (typeof d.monthNum === 'undefined') d.monthNum = null;
                         dayCounter = Math.max(dayCounter, d.id + 1);
                     });
                 });
@@ -619,55 +666,51 @@
     }
 
     function changeMonth(delta) {
-        let newIndex = data.currentMonthIndex + delta;
-        if (newIndex < 0) newIndex = 11;
-        if (newIndex > 11) newIndex = 0;
-        data.currentMonthIndex = newIndex;
+        let i = data.currentMonthIndex + delta;
+        if (i < 0) i = 11;
+        if (i > 11) i = 0;
+        data.currentMonthIndex = i;
         saveData();
         render();
     }
-
-    function getCurrentMonthName() {
-        return MONTHS[data.currentMonthIndex];
-    }
+    function getMonthName() { return MONTHS[data.currentMonthIndex]; }
 
     function createWeek() {
         data.weeks.push({
             id: weekCounter++,
             monthIndex: data.currentMonthIndex,
-            closed: false,
-            days: []
+            closed: false, paid: null, days: []
         });
         saveData();
         render();
     }
 
-    function deleteWeek(weekId) {
+    function deleteWeek(id) {
         if (!confirm('Удалить неделю со всеми днями?')) return;
-        data.weeks = data.weeks.filter(w => w.id !== weekId);
+        data.weeks = data.weeks.filter(w => w.id !== id);
         saveData();
         render();
     }
 
-    function toggleFinishWeek(weekId) {
-        const week = data.weeks.find(w => w.id === weekId);
-        if (!week) return;
-        week.closed = !week.closed;
+    function toggleFinishWeek(id) {
+        const w = data.weeks.find(x => x.id === id);
+        if (!w) return;
+        w.closed = !w.closed;
         saveData();
         render();
     }
 
     function createDay(weekId) {
-        const week = data.weeks.find(w => w.id === weekId);
-        if (!week) return;
-        if (week.closed) { alert('Неделя завершена. Разверните её для редактирования.'); return; }
-        week.days.push({
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        if (w.closed) { alert('Неделя завершена. Разверните её.'); return; }
+
+        const t = today();
+        w.days.push({
             id: dayCounter++,
-            date: '',
-            hours: 0,
-            notes: '',
-            paid: null,
-            collapsed: false
+            dayNum: t.d, monthNum: t.m,
+            night: 0, day: 0, evening: 0,
+            notes: '', paid: null, closed: false
         });
         saveData();
         render();
@@ -675,65 +718,122 @@
 
     function deleteDay(weekId, dayId) {
         if (!confirm('Удалить этот день?')) return;
-        const week = data.weeks.find(w => w.id === weekId);
-        if (!week) return;
-        week.days = week.days.filter(d => d.id !== dayId);
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        w.days = w.days.filter(d => d.id !== dayId);
         saveData();
         render();
     }
 
-    function toggleDayCollapse(weekId, dayId) {
-        const week = data.weeks.find(w => w.id === weekId);
-        if (!week) return;
-        const day = week.days.find(d => d.id === dayId);
-        if (!day) return;
-        day.collapsed = !day.collapsed;
+    function toggleDayClose(weekId, dayId) {
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        const d = w.days.find(x => x.id === dayId);
+        if (!d) return;
+        d.closed = !d.closed;
+        saveData();
+        render();
+    }
+
+    function changeDayNum(weekId, dayId, delta) {
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        const d = w.days.find(x => x.id === dayId);
+        if (!d) return;
+
+        let day = (d.dayNum || 1) + delta;
+        let month = d.monthNum || (new Date().getMonth() + 1);
+        if (day < 1) { day = 31; month--; if (month < 1) month = 12; }
+        if (day > 31) { day = 1; month++; if (month > 12) month = 1; }
+        d.dayNum = day;
+        d.monthNum = month;
         saveData();
         render();
     }
 
     function updateDay(weekId, dayId, field, value) {
-        const week = data.weeks.find(w => w.id === weekId);
-        if (!week) return;
-        const day = week.days.find(d => d.id === dayId);
-        if (!day) return;
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        const d = w.days.find(x => x.id === dayId);
+        if (!d) return;
 
-        if (field === 'hours') {
+        if (field === 'night' || field === 'day' || field === 'evening') {
             let num = parseInt(value, 10);
             if (isNaN(num) || num < 0) num = 0;
-            day.hours = num;
+            d[field] = num;
         } else {
-            day[field] = value;
+            d[field] = value;
         }
         saveData();
     }
 
-    function openPaidDialog(weekId, targetDayId) {
-        const week = data.weeks.find(w => w.id === weekId);
-        if (!week) return;
-
-        if (targetDayId === null) {
-            const current = week.paid == null ? '' : week.paid;
-            const input = prompt('Введите сумму, оплаченную за неделю (руб.):', current);
-            if (input === null) return;
-            const cleaned = input.replace(/[^0-9]/g, '');
-            week.paid = cleaned === '' ? null : parseInt(cleaned, 10);
-        } else {
-            const day = week.days.find(d => d.id === targetDayId);
-            if (!day) return;
-            const current = day.paid == null ? '' : day.paid;
-            const input = prompt('Введите сумму, оплаченную за смену (руб.):', current);
-            if (input === null) return;
-            const cleaned = input.replace(/[^0-9]/g, '');
-            day.paid = cleaned === '' ? null : parseInt(cleaned, 10);
-        }
+    function openPaidDay(weekId, dayId) {
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        const d = w.days.find(x => x.id === dayId);
+        if (!d) return;
+        const cur = d.paid == null ? '' : d.paid;
+        const v = prompt('Введите сумму, оплаченную за смену (руб.):', cur);
+        if (v === null) return;
+        const cleaned = v.replace(/[^0-9]/g, '');
+        d.paid = cleaned === '' ? null : parseInt(cleaned, 10);
         saveData();
         render();
     }
 
+    function openPaidWeek(weekId) {
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        const cur = w.paid == null ? '' : w.paid;
+        const v = prompt('Введите сумму, оплаченную за неделю (руб.). Если оставить пустым — будет использоваться сумма оплат по дням:', cur);
+        if (v === null) return;
+        const cleaned = v.replace(/[^0-9]/g, '');
+        w.paid = cleaned === '' ? null : parseInt(cleaned, 10);
+        saveData();
+        render();
+    }
+
+    /* ===== Итоги (без налога) ===== */
     function getDayTotals(day) {
-        const hours = day.hours || 0;
-        return { hours, money: hours * HOUR_RATE };
+        const cars = (day.night || 0) + (day.day || 0) + (day.evening || 0);
+        const money = cars * RATE;
+        return { cars, money };
+    }
+
+    function getDaysPaidSum(week) {
+        let sum = 0, count = 0;
+        week.days.forEach(d => {
+            if (d.paid != null) { sum += d.paid; count++; }
+        });
+        return { sum, count };
+    }
+
+    function getWeekTotals(week) {
+        let cars = 0, money = 0;
+        week.days.forEach(d => {
+            const t = getDayTotals(d);
+            cars += t.cars;
+            money += t.money;
+        });
+
+        const daysPaid = getDaysPaidSum(week);
+        let paid = null;
+        let paidSource = 'none';
+        if (week.paid != null) {
+            paid = week.paid;
+            paidSource = 'week';
+        } else if (daysPaid.count > 0) {
+            paid = daysPaid.sum;
+            paidSource = 'days';
+        }
+
+        return {
+            cars, money,
+            paid, paidSource,
+            daysPaid: daysPaid.sum,
+            daysPaidCount: daysPaid.count,
+            diff: paid == null ? null : paid - money
+        };
     }
 
     function getPaidStatus(paid, expected) {
@@ -743,70 +843,90 @@
         return 'more';
     }
 
-    function getWeekTotals(week) {
-        let hours = 0, money = 0;
-        week.days.forEach(d => {
-            const t = getDayTotals(d);
-            hours += t.hours;
-            money += t.money;
-        });
-        const paid = week.paid == null ? null : week.paid;
-        return { hours, money, paid, diff: paid == null ? null : paid - money };
-    }
-
     function render() {
-        document.getElementById('monthName').textContent = getCurrentMonthName();
-
-        const createBtn = document.getElementById('createWeekBtn');
-        createBtn.classList.remove('hidden');
-
+        document.getElementById('monthName').textContent = getMonthName();
         const container = document.getElementById('weeksContainer');
         container.innerHTML = '';
 
         const monthWeeks = data.weeks.filter(w => w.monthIndex === data.currentMonthIndex);
 
         if (monthWeeks.length === 0) {
-            container.innerHTML = '<div class="month-empty">В этом месяце пока нет недель. Нажмите «Добавить неделю».</div>';
+            container.innerHTML = '<div class="empty-text">В этом месяце пока нет недель. Нажмите «Создать неделю».</div>';
             return;
         }
 
-        monthWeeks.forEach((week, wIndex) => {
-            const weekEl = document.createElement('div');
-            weekEl.className = 'week-block' + (week.closed ? ' closed' : '');
+        monthWeeks.forEach((week, wIdx) => {
+            container.appendChild(buildWeek(week, wIdx));
+        });
+    }
 
-            weekEl.innerHTML = `
+    function buildWeek(week, wIdx) {
+        const el = document.createElement('div');
+        el.className = 'week-block' + (week.closed ? ' closed' : '');
+        const t = getWeekTotals(week);
+
+        if (week.closed) {
+            const status = getPaidStatus(t.paid, t.money);
+            let paidShort = t.paid == null ? '—' : t.paid + ' ₽';
+            let paidColor = '';
+            if (status === 'match') paidColor = '#b6ffd0';
+            else if (status === 'less') paidColor = '#ffb6b6';
+            else if (status === 'more') paidColor = '#d5b6ff';
+
+            el.innerHTML = `
                 <div class="week-header">
-                    <div class="week-title">📆 ${getCurrentMonthName()} — Неделя ${wIndex + 1}${week.closed ? ' ✅' : ''}</div>
+                    <div class="week-title">${ICONS.checkCircle} Неделя ${wIdx + 1}</div>
+                    <div class="week-summary">
+                        <span class="summary-item green">${t.money} ₽</span>
+                        <span class="summary-item">Оплачено: <b style="color:${paidColor}">${paidShort}</b></span>
+                    </div>
                     <div class="week-actions">
-                        <button class="btn btn-small btn-finish ${week.closed ? 'finished' : ''}" 
-                                onclick="toggleFinishWeek(${week.id})">
-                            ${week.closed ? '↩ Развернуть неделю' : '🏁 Завершить неделю'}
+                        <button class="btn btn-small btn-icon btn-finish" title="Развернуть" onclick="toggleFinishWeek(${week.id})">
+                            ${ICONS.chevronDown}
                         </button>
-                        <button class="btn btn-small btn-danger" onclick="deleteWeek(${week.id})">🗑</button>
+                        <button class="btn btn-small btn-icon btn-danger" title="Удалить" onclick="deleteWeek(${week.id})">
+                            ${ICONS.trash}
+                        </button>
                     </div>
                 </div>
-                ${!week.closed ? `<div class="days-grid" id="days-${week.id}"></div>` : ''}
-                <div id="total-${week.id}"></div>
             `;
-            container.appendChild(weekEl);
+            return el;
+        }
 
-            if (!week.closed) {
-                const daysGrid = weekEl.querySelector(`#days-${week.id}`);
-                week.days.forEach(day => {
-                    daysGrid.appendChild(buildDayCard(week.id, day));
-                });
+        el.innerHTML = `
+            <div class="week-header">
+                <div class="week-title">${ICONS.calendar} ${getMonthName()} — Неделя ${wIdx + 1}</div>
+                <div class="week-actions">
+                    <button class="btn btn-small btn-finish" onclick="toggleFinishWeek(${week.id})">
+                        ${ICONS.flag} Завершить неделю
+                    </button>
+                    <button class="btn btn-small btn-icon btn-danger" title="Удалить" onclick="deleteWeek(${week.id})">
+                        ${ICONS.trash}
+                    </button>
+                </div>
+            </div>
+            <div class="days-grid" id="days-${week.id}"></div>
+            <div id="total-${week.id}"></div>
+        `;
 
-                const addTile = document.createElement('div');
-                addTile.className = 'add-day-tile';
-                addTile.textContent = '＋';
-                addTile.title = 'Добавить день';
-                addTile.onclick = () => createDay(week.id);
-                daysGrid.appendChild(addTile);
-            }
+        setTimeout(() => {
+            const daysGrid = el.querySelector(`#days-${week.id}`);
+            if (!daysGrid) return;
 
-            const totalsEl = weekEl.querySelector(`#total-${week.id}`);
+            week.days.forEach(day => daysGrid.appendChild(buildDay(week.id, day)));
+
+            const addTile = document.createElement('div');
+            addTile.className = 'add-day-tile';
+            addTile.title = 'Добавить день';
+            addTile.innerHTML = ICONS.plus;
+            addTile.onclick = () => createDay(week.id);
+            daysGrid.appendChild(addTile);
+
+            const totalsEl = el.querySelector(`#total-${week.id}`);
             totalsEl.appendChild(buildWeekTotal(week));
-        });
+        }, 0);
+
+        return el;
     }
 
     function buildWeekTotal(week) {
@@ -816,138 +936,190 @@
 
         const status = getPaidStatus(t.paid, t.money);
         let paidBtnClass = 'paid-btn';
-        let paidBtnText = '💰 Оплачено';
-        if (status === 'match') { paidBtnClass += ' status-match'; paidBtnText = `✅ ${t.paid} руб.`; }
-        else if (status === 'less') { paidBtnClass += ' status-less'; paidBtnText = `⬇ ${t.paid} руб.`; }
-        else if (status === 'more') { paidBtnClass += ' status-more'; paidBtnText = `⬆ ${t.paid} руб.`; }
+        let paidBtnText = ICONS.wallet + ' Оплачено';
+        if (status === 'match') { paidBtnClass += ' status-match'; paidBtnText = ICONS.check + ' ' + t.paid + ' ₽'; }
+        else if (status === 'less')  { paidBtnClass += ' status-less';  paidBtnText = '↓ ' + t.paid + ' ₽'; }
+        else if (status === 'more')  { paidBtnClass += ' status-more';  paidBtnText = '↑ ' + t.paid + ' ₽'; }
 
         let diffText = '—';
-        let diffColor = '#8a5a5a';
+        let diffColor = 'rgba(255,255,255,0.85)';
         if (t.diff != null) {
             const sign = t.diff > 0 ? '+' : '';
-            diffText = sign + t.diff + ' руб.';
-            if (t.diff === 0) diffColor = '#1e6b3a';
-            else if (t.diff > 0) diffColor = '#6a2ea0';
-            else diffColor = '#b02020';
+            diffText = sign + t.diff + ' ₽';
+            if (t.diff === 0) diffColor = '#b6ffd0';
+            else if (t.diff > 0) diffColor = '#d5b6ff';
+            else diffColor = '#ffb6b6';
+        }
+
+        let paidNote = '';
+        if (t.paidSource === 'days') {
+            paidNote = `<div class="total-line"><span class="k" style="font-size:12px; opacity:0.75;">(сумма оплат по дням)</span><span class="v"></span></div>`;
+        } else if (t.paidSource === 'week') {
+            paidNote = `<div class="total-line"><span class="k" style="font-size:12px; opacity:0.75;">(указано вручную за неделю)</span><span class="v"></span></div>`;
         }
 
         el.innerHTML = `
             <div class="week-total-title">Итог за неделю</div>
-            <div class="week-total-row">
-                <span class="week-total-amount">${t.money} руб.</span>
-                <button class="${paidBtnClass}" onclick="openPaidDialog(${week.id}, null)">
+            <div class="total-list">
+                <div class="total-line">
+                    <span class="k">Всего:</span>
+                    <span class="v">${t.cars}</span>
+                </div>
+                <div class="total-line">
+                    <span class="k">Сумма:</span>
+                    <span class="v highlight">${t.money} ₽</span>
+                </div>
+                <div class="total-line">
+                    <span class="k">Оплачено:</span>
+                    <span class="v">${t.paid != null ? t.paid + ' ₽' : '—'}</span>
+                </div>
+                ${paidNote}
+                <div class="total-line">
+                    <span class="k">Разница:</span>
+                    <span class="v" style="color:${diffColor}">${diffText}</span>
+                </div>
+            </div>
+            <div class="total-row" style="border-top: 1px solid rgba(255,255,255,0.2); margin-top:12px; padding-top:12px;">
+                <span class="total-label">Оплата недели:</span>
+                <button class="${paidBtnClass}" onclick="openPaidWeek(${week.id})">
                     ${paidBtnText}
                 </button>
-            </div>
-            <div class="week-total-grid">
-                <span class="k">Всего часов:</span>
-                <span class="v">${t.hours}</span>
-
-                <span class="k">Оплачено:</span>
-                <span class="v">${t.paid != null ? t.paid + ' руб.' : '—'}</span>
-
-                <span class="k">Разница:</span>
-                <span class="v" style="color:${diffColor}">${diffText}</span>
             </div>
         `;
         return el;
     }
 
-    function buildDayCard(weekId, day) {
+    function buildDay(weekId, day) {
         const card = document.createElement('div');
-        card.className = 'day-card' + (day.collapsed ? ' collapsed' : '');
+        card.className = 'day-card' + (day.closed ? ' collapsed' : '');
+        const t = getDayTotals(day);
+        const dateStr = (day.dayNum && day.monthNum) ? formatDate(day.dayNum, day.monthNum) : '—';
 
-        const { hours, money } = getDayTotals(day);
-        const status = getPaidStatus(day.paid, money);
+        if (day.closed) {
+            const status = getPaidStatus(day.paid, t.money);
+            let paidColor = '';
+            if (status === 'match') paidColor = '#b6ffd0';
+            else if (status === 'less') paidColor = '#ffb6b6';
+            else if (status === 'more') paidColor = '#d5b6ff';
 
+            card.innerHTML = `
+                <div class="day-top">
+                    <span class="day-date-badge">${dateStr}</span>
+                    <div class="day-summary">
+                        <span class="summary-item green">${t.money} ₽</span>
+                        ${day.paid != null ? `<span class="summary-item">Оплачено: <b style="color:${paidColor}">${day.paid} ₽</b></span>` : ''}
+                    </div>
+                    <div class="day-top-btns">
+                        <button class="icon-btn" title="Развернуть" onclick="toggleDayClose(${weekId}, ${day.id})">
+                            ${ICONS.chevronRight}
+                        </button>
+                        <button class="icon-btn" title="Удалить" onclick="deleteDay(${weekId}, ${day.id})">
+                            ${ICONS.trash}
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        const status = getPaidStatus(day.paid, t.money);
         let paidBtnClass = 'paid-btn';
-        let paidBtnText = '💰 Оплачено';
-        if (status === 'match') { paidBtnClass += ' status-match'; paidBtnText = `✅ ${day.paid} руб.`; }
-        else if (status === 'less') { paidBtnClass += ' status-less'; paidBtnText = `⬇ ${day.paid} руб.`; }
-        else if (status === 'more') { paidBtnClass += ' status-more'; paidBtnText = `⬆ ${day.paid} руб.`; }
-
-        const summaryText = day.collapsed
-            ? `${day.date || 'без даты'} · ${hours} ч · ${money} руб.`
-            : '';
+        let paidBtnText = ICONS.wallet + ' Оплачено';
+        if (status === 'match') { paidBtnClass += ' status-match'; paidBtnText = ICONS.check + ' ' + day.paid + ' ₽'; }
+        else if (status === 'less')  { paidBtnClass += ' status-less';  paidBtnText = '↓ ' + day.paid + ' ₽'; }
+        else if (status === 'more')  { paidBtnClass += ' status-more';  paidBtnText = '↑ ' + day.paid + ' ₽'; }
 
         card.innerHTML = `
             <div class="day-top">
-                <input type="text" class="day-number-input" placeholder="02.10" 
-                       value="${escapeHtml(day.date)}"
-                       oninput="updateDay(${weekId}, ${day.id}, 'date', this.value)">
-                <span class="day-summary">${summaryText}</span>
+                <div class="date-picker">
+                    <button onclick="changeDayNum(${weekId}, ${day.id}, -1)" title="День назад">${ICONS.chevronLeft}</button>
+                    <span class="date-picker-value">${dateStr}</span>
+                    <button onclick="changeDayNum(${weekId}, ${day.id}, 1)" title="День вперёд">${ICONS.chevronRight}</button>
+                </div>
                 <div class="day-top-btns">
-                    <button class="icon-btn notes-indicator" title="Примечания" 
-                            onclick="toggleNotes(this)">📝</button>
-                    <button class="icon-btn" title="${day.collapsed ? 'Развернуть' : 'Свернуть'}" 
-                            onclick="toggleDayCollapse(${weekId}, ${day.id})">
-                        ${day.collapsed ? '▸' : '▾'}
-                    </button>
-                    <button class="icon-btn" title="Удалить день" 
-                            onclick="deleteDay(${weekId}, ${day.id})">✕</button>
+                    <button class="icon-btn" title="Примечания" onclick="toggleNotes(this)">${ICONS.note}</button>
+                    <button class="icon-btn" title="Завершить смену" onclick="toggleDayClose(${weekId}, ${day.id})">${ICONS.check}</button>
+                    <button class="icon-btn" title="Удалить" onclick="deleteDay(${weekId}, ${day.id})">${ICONS.trash}</button>
                 </div>
             </div>
 
-            <div class="day-body">
-                <div class="shift-row">
-                    <input type="number" class="hours-input" min="0" placeholder="0"
-                           value="${day.hours || ''}"
-                           oninput="onHoursInput(this, ${weekId}, ${day.id})">
-                    <span class="hours-word">часов</span>
-                    <span class="money">${money} руб.</span>
-                </div>
+            <div class="shift-row">
+                <span class="shift-label">Ночь</span>
+                <input type="number" class="cars-input" min="0" placeholder="0"
+                       value="${day.night || ''}"
+                       oninput="onCarsInput(this, ${weekId}, ${day.id}, 'night')">
+                <span class="cars-word">ед.</span>
+                <span class="money">${(day.night || 0) * RATE} ₽</span>
+            </div>
+            <div class="shift-row">
+                <span class="shift-label">День</span>
+                <input type="number" class="cars-input" min="0" placeholder="0"
+                       value="${day.day || ''}"
+                       oninput="onCarsInput(this, ${weekId}, ${day.id}, 'day')">
+                <span class="cars-word">ед.</span>
+                <span class="money">${(day.day || 0) * RATE} ₽</span>
+            </div>
+            <div class="shift-row">
+                <span class="shift-label">Вечер</span>
+                <input type="number" class="cars-input" min="0" placeholder="0"
+                       value="${day.evening || ''}"
+                       oninput="onCarsInput(this, ${weekId}, ${day.id}, 'evening')">
+                <span class="cars-word">ед.</span>
+                <span class="money">${(day.evening || 0) * RATE} ₽</span>
+            </div>
 
-                <div class="total-row">
-                    <span class="total-label">Итого за смену:</span>
-                    <div class="total-block">
-                        <span class="total-value">${hours} ч</span>
-                        <span class="total-money">${money} руб.</span>
-                    </div>
-                    <button class="${paidBtnClass}" onclick="openPaidDialog(${weekId}, ${day.id})">
-                        ${paidBtnText}
-                    </button>
+            <div class="total-row">
+                <span class="total-label">Итого за смену:</span>
+                <div class="total-block">
+                    <span class="total-value">${t.cars} ед.</span>
+                    <span class="total-money">${t.money} ₽</span>
                 </div>
+                <button class="${paidBtnClass}" onclick="openPaidDay(${weekId}, ${day.id})">
+                    ${paidBtnText}
+                </button>
+            </div>
 
-                <div class="notes-block ${day.notes ? 'open' : ''}">
-                    <textarea class="notes-textarea" placeholder="Дополнительные комментарии..."
-                              oninput="updateDay(${weekId}, ${day.id}, 'notes', this.value)">${escapeHtml(day.notes)}</textarea>
-                </div>
+            <div class="notes-block ${day.notes ? 'open' : ''}">
+                <textarea class="notes-textarea" placeholder="Дополнительные комментарии..."
+                          oninput="updateDay(${weekId}, ${day.id}, 'notes', this.value)">${escapeHtml(day.notes)}</textarea>
             </div>
         `;
         return card;
     }
 
-    function onHoursInput(input, weekId, dayId) {
+    function onCarsInput(input, weekId, dayId, field) {
         let val = input.value.replace(/[^0-9]/g, '');
         input.value = val;
-        updateDay(weekId, dayId, 'hours', val);
-
-        const week = data.weeks.find(w => w.id === weekId);
-        if (!week) return;
-        const day = week.days.find(d => d.id === dayId);
-        if (!day) return;
+        updateDay(weekId, dayId, field, val);
 
         const card = input.closest('.day-card');
-        const { hours, money } = getDayTotals(day);
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        const d = w.days.find(x => x.id === dayId);
+        if (!d) return;
+        const t = getDayTotals(d);
 
-        card.querySelector('.money').textContent = money + ' руб.';
-        card.querySelector('.total-value').textContent = hours + ' ч';
-        card.querySelector('.total-money').textContent = money + ' руб.';
+        const rows = card.querySelectorAll('.shift-row .money');
+        if (rows[0]) rows[0].textContent = (d.night * RATE) + ' ₽';
+        if (rows[1]) rows[1].textContent = (d.day * RATE) + ' ₽';
+        if (rows[2]) rows[2].textContent = (d.evening * RATE) + ' ₽';
+
+        card.querySelector('.total-value').textContent = t.cars + ' ед.';
+        card.querySelector('.total-money').textContent = t.money + ' ₽';
 
         const paidBtn = card.querySelector('.paid-btn');
-        if (paidBtn && day.paid != null) {
+        if (paidBtn && d.paid != null) {
             paidBtn.classList.remove('status-match', 'status-less', 'status-more');
-            const status = getPaidStatus(day.paid, money);
-            if (status === 'match') { paidBtn.classList.add('status-match'); paidBtn.textContent = `✅ ${day.paid} руб.`; }
-            else if (status === 'less') { paidBtn.classList.add('status-less'); paidBtn.textContent = `⬇ ${day.paid} руб.`; }
-            else if (status === 'more') { paidBtn.classList.add('status-more'); paidBtn.textContent = `⬆ ${day.paid} руб.`; }
+            const status = getPaidStatus(d.paid, t.money);
+            if (status === 'match') { paidBtn.classList.add('status-match'); paidBtn.innerHTML = ICONS.check + ' ' + d.paid + ' ₽'; }
+            else if (status === 'less') { paidBtn.classList.add('status-less'); paidBtn.innerHTML = '↓ ' + d.paid + ' ₽'; }
+            else if (status === 'more') { paidBtn.classList.add('status-more'); paidBtn.innerHTML = '↑ ' + d.paid + ' ₽'; }
         }
     }
 
     function toggleNotes(btn) {
         const card = btn.closest('.day-card');
-        const notes = card.querySelector('.notes-block');
-        notes.classList.toggle('open');
+        card.querySelector('.notes-block').classList.toggle('open');
     }
 
     function escapeHtml(str) {
