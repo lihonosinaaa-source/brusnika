@@ -347,37 +347,26 @@
         user-select: none;
     }
 
+    /* ===== Одна строка часов ===== */
     .shift-row {
         display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 7px 0;
-        border-bottom: 1px solid rgba(200, 120, 120, 0.15);
-    }
-
-    .shift-row:last-of-type { border-bottom: none; }
-
-    .shift-label {
-        width: 62px;
-        font-size: 14px;
-        font-weight: 600;
-        color: #8a5a5a;
-        flex-shrink: 0;
+        gap: 10px;
+        padding: 10px 0;
     }
 
     .hours-input {
-        width: 75px;
+        width: 110px;
         background: rgba(255, 255, 255, 0.75);
         border: 1px solid rgba(200, 120, 120, 0.4);
         border-radius: 9px;
         color: #5a2a2a;
-        padding: 7px 9px;
-        font-size: 14px;
+        padding: 9px 11px;
+        font-size: 16px;
         text-align: center;
         outline: none;
         transition: 0.2s;
-        -moz-appearance: textfield;
-        font-weight: 600;
+        font-weight: 700;
     }
 
     .hours-input::-webkit-outer-spin-button,
@@ -393,7 +382,7 @@
     }
 
     .hours-word {
-        font-size: 13px;
+        font-size: 15px;
         color: #8a5a5a;
         flex-shrink: 0;
         font-weight: 600;
@@ -403,7 +392,7 @@
         margin-left: auto;
         font-weight: 700;
         color: #b05050;
-        font-size: 15px;
+        font-size: 17px;
         white-space: nowrap;
     }
 
@@ -565,10 +554,9 @@
     }
 
     @media (max-width: 480px) {
-        .shift-label { width: 52px; font-size: 13px; }
-        .hours-input { width: 62px; }
-        .hours-word { font-size: 12px; }
-        .money { font-size: 14px; }
+        .hours-input { width: 90px; font-size: 15px; }
+        .hours-word { font-size: 13px; }
+        .money { font-size: 15px; }
         .week-title { font-size: 14px; }
         .total-value, .total-money { font-size: 12px; padding: 3px 8px; }
         .month-name { font-size: 16px; }
@@ -615,7 +603,7 @@
 </div>
 
 <script>
-    const STORAGE_KEY = 'brusnikaScheduleData_v2';
+    const STORAGE_KEY = 'brusnikaScheduleData_v3';
     const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь',
                     'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
     const RATE = 300;
@@ -642,6 +630,30 @@
     function today() { const d = new Date(); return { d: d.getDate(), m: d.getMonth() + 1, y: d.getFullYear() }; }
     function formatDate(day, month) { return pad(day) + '.' + pad(month); }
 
+    /* ===== Парсинг часов (дробные значения) ===== */
+    function parseHours(str) {
+        if (str == null || str === '') return 0;
+        // заменяем запятую на точку
+        let cleaned = String(str).replace(',', '.').replace(/[^0-9.]/g, '');
+        // отсекаем лишние точки
+        const parts = cleaned.split('.');
+        if (parts.length > 1) cleaned = parts[0] + '.' + parts.slice(1).join('');
+        const num = parseFloat(cleaned);
+        if (isNaN(num) || num < 0) return 0;
+        return num;
+    }
+
+    /* Формат часов для отображения — убираем лишние нули */
+    function formatHours(h) {
+        if (h == null || isNaN(h)) return '0';
+        // округляем до 2 знаков
+        const r = Math.round(h * 100) / 100;
+        // если целое — показываем без десятичных
+        if (r === Math.floor(r)) return String(r);
+        // заменяем точку на запятую
+        return String(r).replace('.', ',');
+    }
+
     function loadData() {
         try {
             const saved = localStorage.getItem(STORAGE_KEY);
@@ -659,6 +671,11 @@
                         if (typeof d.closed === 'undefined') d.closed = false;
                         if (typeof d.dayNum === 'undefined') d.dayNum = null;
                         if (typeof d.monthNum === 'undefined') d.monthNum = null;
+                        // миграция со старого формата (night/day/evening)
+                        if (typeof d.hours === 'undefined') {
+                            const n = (d.night || 0) + (d.day || 0) + (d.evening || 0);
+                            d.hours = n;
+                        }
                         dayCounter = Math.max(dayCounter, d.id + 1);
                     });
                 });
@@ -715,7 +732,7 @@
         w.days.push({
             id: dayCounter++,
             dayNum: t.d, monthNum: t.m,
-            night: 0, day: 0, evening: 0,
+            hours: 0,
             notes: '', paid: null, closed: false
         });
         saveData();
@@ -757,19 +774,22 @@
         render();
     }
 
+    /* Сохраняем «сырое» значение часов из поля */
+    function updateDayHours(weekId, dayId, rawValue) {
+        const w = data.weeks.find(x => x.id === weekId);
+        if (!w) return;
+        const d = w.days.find(x => x.id === dayId);
+        if (!d) return;
+        d.hours = parseHours(rawValue);
+        saveData();
+    }
+
     function updateDay(weekId, dayId, field, value) {
         const w = data.weeks.find(x => x.id === weekId);
         if (!w) return;
         const d = w.days.find(x => x.id === dayId);
         if (!d) return;
-
-        if (field === 'night' || field === 'day' || field === 'evening') {
-            let num = parseInt(value, 10);
-            if (isNaN(num) || num < 0) num = 0;
-            d[field] = num;
-        } else {
-            d[field] = value;
-        }
+        d[field] = value;
         saveData();
     }
 
@@ -801,9 +821,9 @@
 
     /* ===== Итоги (без налога) ===== */
     function getDayTotals(day) {
-        const hours = (day.night || 0) + (day.day || 0) + (day.evening || 0);
-        const money = hours * RATE;
-        return { hours, cars: hours, money };
+        const hours = day.hours || 0;
+        const money = Math.round(hours * RATE);
+        return { hours, money };
     }
 
     function getDaysPaidSum(week) {
@@ -834,7 +854,7 @@
         }
 
         return {
-            hours, cars: hours, money,
+            hours, money,
             paid, paidSource,
             daysPaid: daysPaid.sum,
             daysPaidCount: daysPaid.count,
@@ -969,7 +989,7 @@
             <div class="total-list">
                 <div class="total-line">
                     <span class="k">Всего часов:</span>
-                    <span class="v">${t.hours}</span>
+                    <span class="v">${formatHours(t.hours)}</span>
                 </div>
                 <div class="total-line">
                     <span class="k">Сумма:</span>
@@ -1012,6 +1032,7 @@
                 <div class="day-top">
                     <span class="day-date-badge">${dateStr}</span>
                     <div class="day-summary">
+                        <span class="summary-item">${formatHours(t.hours)} ч</span>
                         <span class="summary-item green">${t.money} ₽</span>
                         ${day.paid != null ? `<span class="summary-item">Оплачено: <b style="color:${paidColor}">${day.paid} ₽</b></span>` : ''}
                     </div>
@@ -1050,34 +1071,17 @@
             </div>
 
             <div class="shift-row">
-                <span class="shift-label">Ночь</span>
-                <input type="number" class="hours-input" min="0" placeholder="0"
-                       value="${day.night || ''}"
-                       oninput="onHoursInput(this, ${weekId}, ${day.id}, 'night')">
+                <input type="text" inputmode="decimal" class="hours-input" placeholder="0"
+                       value="${day.hours ? formatHours(day.hours) : ''}"
+                       oninput="onHoursInput(this, ${weekId}, ${day.id})">
                 <span class="hours-word">часов</span>
-                <span class="money">${(day.night || 0) * RATE} ₽</span>
-            </div>
-            <div class="shift-row">
-                <span class="shift-label">День</span>
-                <input type="number" class="hours-input" min="0" placeholder="0"
-                       value="${day.day || ''}"
-                       oninput="onHoursInput(this, ${weekId}, ${day.id}, 'day')">
-                <span class="hours-word">часов</span>
-                <span class="money">${(day.day || 0) * RATE} ₽</span>
-            </div>
-            <div class="shift-row">
-                <span class="shift-label">Вечер</span>
-                <input type="number" class="hours-input" min="0" placeholder="0"
-                       value="${day.evening || ''}"
-                       oninput="onHoursInput(this, ${weekId}, ${day.id}, 'evening')">
-                <span class="hours-word">часов</span>
-                <span class="money">${(day.evening || 0) * RATE} ₽</span>
+                <span class="money">${t.money} ₽</span>
             </div>
 
             <div class="total-row">
                 <span class="total-label">Итого за смену:</span>
                 <div class="total-block">
-                    <span class="total-value">${t.hours} часов</span>
+                    <span class="total-value">${formatHours(t.hours)} часов</span>
                     <span class="total-money">${t.money} ₽</span>
                 </div>
                 <button class="${paidBtnClass}" onclick="openPaidDay(${weekId}, ${day.id})">
@@ -1093,24 +1097,40 @@
         return card;
     }
 
-    function onHoursInput(input, weekId, dayId, field) {
-        let val = input.value.replace(/[^0-9]/g, '');
-        input.value = val;
-        updateDay(weekId, dayId, field, val);
+    function onHoursInput(input, weekId, dayId) {
+        // Разрешаем только цифры, точку и запятую; одна разделительная
+        let val = input.value.replace(/[^0-9.,]/g, '');
+        // Заменим запятую на точку для подсчёта
+        let normalized = val.replace(',', '.');
+        // Уберём лишние точки, оставим только первую
+        const firstDot = normalized.indexOf('.');
+        if (firstDot !== -1) {
+            normalized = normalized.slice(0, firstDot + 1) + normalized.slice(firstDot + 1).replace(/\./g, '');
+        }
+        // Ограничим до 2 знаков после точки
+        if (normalized.includes('.')) {
+            const [intPart, fracPart] = normalized.split('.');
+            normalized = intPart + '.' + (fracPart || '').slice(0, 2);
+        }
+        // Ограничим длину целой части
+        const finalParts = normalized.split('.');
+        if (finalParts[0].length > 4) finalParts[0] = finalParts[0].slice(0, 4);
+        normalized = finalParts.join('.');
 
-        const card = input.closest('.day-card');
+        // Отображаем обратно с запятой (для удобства пользователя)
+        input.value = normalized.replace('.', ',');
+
+        updateDayHours(weekId, dayId, normalized);
+
         const w = data.weeks.find(x => x.id === weekId);
         if (!w) return;
         const d = w.days.find(x => x.id === dayId);
         if (!d) return;
         const t = getDayTotals(d);
 
-        const rows = card.querySelectorAll('.shift-row .money');
-        if (rows[0]) rows[0].textContent = (d.night * RATE) + ' ₽';
-        if (rows[1]) rows[1].textContent = (d.day * RATE) + ' ₽';
-        if (rows[2]) rows[2].textContent = (d.evening * RATE) + ' ₽';
-
-        card.querySelector('.total-value').textContent = t.hours + ' часов';
+        const card = input.closest('.day-card');
+        card.querySelector('.money').textContent = t.money + ' ₽';
+        card.querySelector('.total-value').textContent = formatHours(t.hours) + ' часов';
         card.querySelector('.total-money').textContent = t.money + ' ₽';
 
         const paidBtn = card.querySelector('.paid-btn');
