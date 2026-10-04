@@ -10,22 +10,23 @@
 
     body {
         min-height: 100vh;
-        background-color: #1a2a0a;
-        background-image: url('https://e.radikal.host/2026/10/01/IMG_4280.png');
+        background-color: #f7e9e9;
+        background-image: url('https://e.radikal.host/2026/10/05/IMG_4283.png');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
         background-repeat: no-repeat;
         padding: 30px 15px;
-        color: #fff;
+        color: #5a2a2a;
     }
 
     body::before {
         content: '';
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(20, 40, 10, 0.4);
-        backdrop-filter: blur(2px);
+        background: rgba(255, 235, 235, 0.18);
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
         z-index: -1;
     }
 
@@ -34,7 +35,8 @@
         font-weight: 300;
         letter-spacing: 2px;
         margin-bottom: 22px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+        color: #7a2f2f;
+        text-shadow: 0 2px 10px rgba(255,255,255,0.8);
         font-size: 28px;
         display: flex;
         align-items: center;
@@ -50,27 +52,27 @@
     .icon-sm { width: 14px; height: 14px; }
 
     .btn {
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        color: #fff;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(200, 120, 120, 0.5);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color: #7a2f2f;
         padding: 11px 20px;
         border-radius: 14px;
         cursor: pointer;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         transition: all 0.2s ease;
-        box-shadow: 0 4px 20px rgba(0, 40, 10, 0.25);
+        box-shadow: 0 4px 20px rgba(200, 120, 120, 0.25);
         display: inline-flex;
         align-items: center;
         gap: 7px;
     }
 
     .btn:hover {
-        background: rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.85);
         transform: translateY(-1px);
-        box-shadow: 0 6px 22px rgba(0, 80, 20, 0.4);
+        box-shadow: 0 6px 22px rgba(200, 120, 120, 0.4);
     }
 
     .btn:active { transform: translateY(0); }
@@ -80,24 +82,24 @@
         justify-content: center;
         align-items: center;
         gap: 12px;
-        background: rgba(255, 255, 255, 0.13);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(200, 120, 120, 0.4);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
         border-radius: 18px;
         padding: 10px 16px;
         margin: 0 auto 20px;
         max-width: 420px;
-        box-shadow: 0 6px 24px rgba(0, 40, 10, 0.25);
+        box-shadow: 0 6px 24px rgba(200, 120, 120, 0.2);
     }
 
     .month-arrow {
         width: 36px;
         height: 36px;
         border-radius: 10px;
-        background: rgba(255, 255, 255, 0.18);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        color: #fff;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(200, 120, 120, 0.4);
+        color: #7a2f2f;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -106,7 +108,7 @@
     }
 
     .month-arrow:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: #fff;
         transform: scale(1.05);
     }
 
@@ -114,8 +116,8 @@
         flex: 1;
         text-align: center;
         font-size: 18px;
-        font-weight: 600;
-        color: #e8f2ff;
+        font-weight: 700;
+        color: #7a2f2f;
         letter-spacing: 0.5px;
         user-select: none;
     }
@@ -128,19 +130,19 @@
     }
 
     .week-block {
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(200, 120, 120, 0.4);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 20px;
         padding: 16px;
         margin-bottom: 18px;
-        box-shadow: 0 8px 32px rgba(0, 40, 10, 0.3);
+        box-shadow: 0 8px 32px rgba(200, 120, 120, 0.25);
     }
 
     .week-block.closed {
-        border-color: rgba(180, 255, 140, 0.5);
-        box-shadow: 0 8px 32px rgba(60, 200, 60, 0.25);
+        border-color: rgba(120, 200, 140, 0.6);
+        box-shadow: 0 8px 32px rgba(120, 200, 140, 0.25);
         padding: 12px 16px;
     }
 
@@ -155,13 +157,13 @@
     .week-block:not(.closed) .week-header {
         margin-bottom: 14px;
         padding-bottom: 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.2);
+        border-bottom: 1px solid rgba(200, 120, 120, 0.25);
     }
 
     .week-title {
         font-size: 16px;
-        font-weight: 600;
-        color: #e8f2ff;
+        font-weight: 700;
+        color: #7a2f2f;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -177,18 +179,18 @@
 
     .summary-item {
         font-size: 13px;
-        color: #cfe4ff;
-        background: rgba(100, 170, 255, 0.18);
+        color: #8a5a5a;
+        background: rgba(255, 210, 210, 0.6);
         padding: 4px 10px;
         border-radius: 8px;
-        border: 1px solid rgba(150, 200, 255, 0.3);
+        border: 1px solid rgba(220, 140, 140, 0.5);
         white-space: nowrap;
     }
 
     .summary-item.green {
-        color: #b6ffd0;
-        background: rgba(60, 220, 130, 0.2);
-        border-color: rgba(120, 255, 180, 0.4);
+        color: #1e6b3a;
+        background: rgba(200, 245, 215, 0.7);
+        border-color: rgba(120, 220, 150, 0.6);
     }
 
     .week-actions { display: flex; gap: 6px; }
@@ -204,18 +206,20 @@
     }
 
     .btn-danger {
-        background: rgba(255, 80, 80, 0.22);
-        border-color: rgba(255, 120, 120, 0.5);
+        background: rgba(255, 180, 180, 0.55);
+        border-color: rgba(230, 120, 120, 0.6);
+        color: #8a2a2a;
     }
 
-    .btn-danger:hover { background: rgba(255, 80, 80, 0.45); }
+    .btn-danger:hover { background: rgba(255, 160, 160, 0.85); }
 
     .btn-finish {
-        background: rgba(100, 200, 255, 0.22);
-        border-color: rgba(140, 220, 255, 0.5);
+        background: rgba(255, 210, 210, 0.6);
+        border-color: rgba(220, 140, 140, 0.6);
+        color: #7a2f2f;
     }
 
-    .btn-finish:hover { background: rgba(100, 200, 255, 0.42); }
+    .btn-finish:hover { background: rgba(255, 190, 190, 0.9); }
 
     .add-day-tile {
         display: flex;
@@ -224,18 +228,18 @@
         width: 52px;
         height: 52px;
         border-radius: 14px;
-        background: rgba(100, 170, 255, 0.18);
-        border: 2px dashed rgba(255, 255, 255, 0.5);
+        background: rgba(255, 200, 200, 0.5);
+        border: 2px dashed rgba(200, 100, 100, 0.6);
         cursor: pointer;
-        color: #fff;
+        color: #8a2a2a;
         transition: all 0.25s ease;
         backdrop-filter: blur(10px);
     }
 
     .add-day-tile:hover {
-        background: rgba(100, 170, 255, 0.38);
+        background: rgba(255, 180, 180, 0.75);
         transform: scale(1.06);
-        border-color: #fff;
+        border-color: #8a2a2a;
     }
 
     .days-grid {
@@ -247,13 +251,13 @@
 
     .day-card {
         width: 100%;
-        background: rgba(255, 255, 255, 0.13);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(200, 120, 120, 0.35);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
         border-radius: 16px;
         padding: 12px 14px;
-        box-shadow: 0 6px 24px rgba(0, 40, 10, 0.22);
+        box-shadow: 0 6px 24px rgba(200, 120, 120, 0.2);
         animation: fadeIn 0.25s ease;
     }
 
@@ -272,13 +276,13 @@
     .day-card:not(.collapsed) .day-top { margin-bottom: 10px; }
 
     .day-date-badge {
-        background: rgba(100, 170, 255, 0.25);
-        border: 1px solid rgba(150, 200, 255, 0.4);
-        color: #fff;
+        background: rgba(255, 210, 210, 0.7);
+        border: 1px solid rgba(220, 140, 140, 0.5);
+        color: #7a2f2f;
         padding: 5px 12px;
         border-radius: 8px;
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 700;
         white-space: nowrap;
     }
 
@@ -293,9 +297,9 @@
     .day-top-btns { display: flex; gap: 5px; }
 
     .icon-btn {
-        background: rgba(255,255,255,0.12);
-        border: 1px solid rgba(255,255,255,0.25);
-        color: #fff;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(200, 120, 120, 0.4);
+        color: #7a2f2f;
         width: 30px;
         height: 30px;
         border-radius: 8px;
@@ -306,14 +310,14 @@
         transition: 0.2s;
     }
 
-    .icon-btn:hover { background: rgba(255,255,255,0.28); }
+    .icon-btn:hover { background: #fff; transform: scale(1.05); }
 
     .date-picker {
         display: flex;
         align-items: center;
         gap: 6px;
-        background: rgba(255,255,255,0.1);
-        border: 1px solid rgba(255,255,255,0.28);
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(200, 120, 120, 0.4);
         border-radius: 10px;
         padding: 3px 6px;
     }
@@ -321,7 +325,7 @@
     .date-picker button {
         background: transparent;
         border: none;
-        color: #fff;
+        color: #7a2f2f;
         cursor: pointer;
         padding: 2px 6px;
         font-size: 14px;
@@ -331,14 +335,14 @@
         align-items: center;
     }
 
-    .date-picker button:hover { background: rgba(255,255,255,0.18); }
+    .date-picker button:hover { background: rgba(255, 210, 210, 0.6); }
 
     .date-picker-value {
         min-width: 58px;
         text-align: center;
         font-size: 14px;
-        font-weight: 600;
-        color: #fff;
+        font-weight: 700;
+        color: #7a2f2f;
         padding: 3px 4px;
         user-select: none;
     }
@@ -348,7 +352,7 @@
         align-items: center;
         gap: 8px;
         padding: 7px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(200, 120, 120, 0.15);
     }
 
     .shift-row:last-of-type { border-bottom: none; }
@@ -356,47 +360,49 @@
     .shift-label {
         width: 62px;
         font-size: 14px;
-        font-weight: 500;
-        color: #cfe4ff;
+        font-weight: 600;
+        color: #8a5a5a;
         flex-shrink: 0;
     }
 
-    .cars-input {
+    .hours-input {
         width: 75px;
-        background: rgba(255,255,255,0.12);
-        border: 1px solid rgba(255,255,255,0.28);
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(200, 120, 120, 0.4);
         border-radius: 9px;
-        color: #fff;
+        color: #5a2a2a;
         padding: 7px 9px;
         font-size: 14px;
         text-align: center;
         outline: none;
         transition: 0.2s;
         -moz-appearance: textfield;
+        font-weight: 600;
     }
 
-    .cars-input::-webkit-outer-spin-button,
-    .cars-input::-webkit-inner-spin-button {
+    .hours-input::-webkit-outer-spin-button,
+    .hours-input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
 
-    .cars-input:focus {
-        border-color: #a3d977;
-        background: rgba(255,255,255,0.22);
-        box-shadow: 0 0 0 3px rgba(140, 220, 100, 0.25);
+    .hours-input:focus {
+        border-color: #d68a8a;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(220, 140, 140, 0.25);
     }
 
-    .cars-word {
+    .hours-word {
         font-size: 13px;
-        color: rgba(255,255,255,0.75);
+        color: #8a5a5a;
         flex-shrink: 0;
+        font-weight: 600;
     }
 
     .money {
         margin-left: auto;
-        font-weight: 600;
-        color: #c9f0a8;
+        font-weight: 700;
+        color: #b05050;
         font-size: 15px;
         white-space: nowrap;
     }
@@ -407,15 +413,15 @@
         align-items: center;
         margin-top: 8px;
         padding-top: 10px;
-        border-top: 1px solid rgba(255,255,255,0.25);
+        border-top: 1px solid rgba(200, 120, 120, 0.3);
         gap: 8px;
         flex-wrap: wrap;
     }
 
     .total-label {
         font-size: 14px;
-        font-weight: 600;
-        color: #e8f2ff;
+        font-weight: 700;
+        color: #7a2f2f;
     }
 
     .total-block {
@@ -429,56 +435,56 @@
     .total-value {
         font-size: 14px;
         font-weight: 700;
-        color: #fff;
-        background: rgba(100, 170, 255, 0.3);
+        color: #7a2f2f;
+        background: rgba(255, 210, 210, 0.7);
         padding: 4px 12px;
         border-radius: 9px;
-        border: 1px solid rgba(150, 200, 255, 0.4);
+        border: 1px solid rgba(220, 140, 140, 0.5);
         white-space: nowrap;
     }
 
     .total-money {
         font-size: 14px;
         font-weight: 700;
-        color: #b6ffd0;
-        background: rgba(60, 220, 130, 0.25);
+        color: #1e6b3a;
+        background: rgba(200, 245, 215, 0.7);
         padding: 4px 12px;
         border-radius: 9px;
-        border: 1px solid rgba(120, 255, 180, 0.5);
+        border: 1px solid rgba(120, 220, 150, 0.6);
         white-space: nowrap;
     }
 
     .paid-btn {
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 700;
         color: #fff;
-        background: rgba(100, 170, 255, 0.3);
+        background: rgba(180, 130, 130, 0.75);
         padding: 5px 12px;
         border-radius: 9px;
-        border: 1px solid rgba(150, 200, 255, 0.4);
+        border: 1px solid rgba(150, 100, 100, 0.6);
         cursor: pointer;
         transition: all 0.2s ease;
         white-space: nowrap;
     }
 
-    .paid-btn:hover { transform: translateY(-1px); filter: brightness(1.15); }
+    .paid-btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
 
     .paid-btn.status-match {
-        background: rgba(60, 220, 130, 0.55);
-        border-color: rgba(120, 255, 180, 0.85);
-        box-shadow: 0 0 12px rgba(60, 220, 130, 0.5);
+        background: rgba(80, 210, 130, 0.85);
+        border-color: rgba(60, 190, 110, 0.95);
+        box-shadow: 0 0 12px rgba(80, 210, 130, 0.55);
     }
 
     .paid-btn.status-less {
-        background: rgba(255, 70, 70, 0.55);
-        border-color: rgba(255, 130, 130, 0.85);
-        box-shadow: 0 0 12px rgba(255, 70, 70, 0.5);
+        background: rgba(240, 90, 90, 0.85);
+        border-color: rgba(220, 70, 70, 0.95);
+        box-shadow: 0 0 12px rgba(240, 90, 90, 0.55);
     }
 
     .paid-btn.status-more {
-        background: rgba(170, 90, 255, 0.55);
-        border-color: rgba(210, 150, 255, 0.85);
-        box-shadow: 0 0 12px rgba(170, 90, 255, 0.5);
+        background: rgba(180, 120, 240, 0.85);
+        border-color: rgba(160, 100, 220, 0.95);
+        box-shadow: 0 0 12px rgba(180, 120, 240, 0.55);
     }
 
     .notes-block { margin-top: 10px; display: none; }
@@ -488,10 +494,10 @@
         width: 100%;
         min-height: 65px;
         resize: vertical;
-        background: rgba(255,255,255,0.12);
-        border: 1px solid rgba(255,255,255,0.28);
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(200, 120, 120, 0.4);
         border-radius: 11px;
-        color: #fff;
+        color: #5a2a2a;
         padding: 10px;
         font-size: 13px;
         outline: none;
@@ -499,28 +505,28 @@
         transition: 0.2s;
     }
 
-    .notes-textarea::placeholder { color: rgba(255,255,255,0.5); }
+    .notes-textarea::placeholder { color: rgba(140, 80, 80, 0.55); }
 
     .notes-textarea:focus {
-        border-color: #a3d977;
-        background: rgba(255,255,255,0.2);
-        box-shadow: 0 0 0 3px rgba(140, 220, 100, 0.25);
+        border-color: #d68a8a;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(220, 140, 140, 0.25);
     }
 
     .week-total {
         margin-top: 14px;
         padding: 14px;
         border-radius: 14px;
-        background: rgba(60, 220, 130, 0.15);
-        border: 1px solid rgba(120, 255, 180, 0.45);
+        background: rgba(255, 230, 230, 0.7);
+        border: 1px solid rgba(220, 140, 140, 0.5);
         backdrop-filter: blur(12px);
         animation: fadeIn 0.3s ease;
     }
 
     .week-total-title {
         font-size: 14px;
-        font-weight: 600;
-        color: #d6ffe8;
+        font-weight: 700;
+        color: #7a2f2f;
         margin-bottom: 10px;
     }
 
@@ -539,20 +545,20 @@
         padding: 2px 0;
     }
 
-    .total-line .k { color: rgba(255,255,255,0.85); }
+    .total-line .k { color: #8a5a5a; }
 
     .total-line .v {
-        color: #fff;
+        color: #5a2a2a;
         font-weight: 700;
         text-align: right;
         white-space: nowrap;
     }
 
-    .total-line .v.highlight { color: #b6ffd0; font-size: 15px; }
+    .total-line .v.highlight { color: #1e6b3a; font-size: 15px; }
 
     .empty-text {
         text-align: center;
-        color: rgba(255,255,255,0.7);
+        color: rgba(140, 80, 80, 0.75);
         font-size: 14px;
         padding: 24px;
         font-style: italic;
@@ -560,8 +566,8 @@
 
     @media (max-width: 480px) {
         .shift-label { width: 52px; font-size: 13px; }
-        .cars-input { width: 62px; }
-        .cars-word { font-size: 12px; }
+        .hours-input { width: 62px; }
+        .hours-word { font-size: 12px; }
         .money { font-size: 14px; }
         .week-title { font-size: 14px; }
         .total-value, .total-money { font-size: 12px; padding: 3px 8px; }
@@ -609,10 +615,10 @@
 </div>
 
 <script>
-    const STORAGE_KEY = 'brusnikaScheduleData_v1';
+    const STORAGE_KEY = 'brusnikaScheduleData_v2';
     const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь',
                     'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-    const RATE = 300;   // ставка за единицу (можете поменять)
+    const RATE = 300;
 
     let data = { currentMonthIndex: new Date().getMonth(), weeks: [] };
     let weekCounter = 0;
@@ -795,9 +801,9 @@
 
     /* ===== Итоги (без налога) ===== */
     function getDayTotals(day) {
-        const cars = (day.night || 0) + (day.day || 0) + (day.evening || 0);
-        const money = cars * RATE;
-        return { cars, money };
+        const hours = (day.night || 0) + (day.day || 0) + (day.evening || 0);
+        const money = hours * RATE;
+        return { hours, cars: hours, money };
     }
 
     function getDaysPaidSum(week) {
@@ -809,10 +815,10 @@
     }
 
     function getWeekTotals(week) {
-        let cars = 0, money = 0;
+        let hours = 0, money = 0;
         week.days.forEach(d => {
             const t = getDayTotals(d);
-            cars += t.cars;
+            hours += t.hours;
             money += t.money;
         });
 
@@ -828,7 +834,7 @@
         }
 
         return {
-            cars, money,
+            hours, cars: hours, money,
             paid, paidSource,
             daysPaid: daysPaid.sum,
             daysPaidCount: daysPaid.count,
@@ -869,9 +875,9 @@
             const status = getPaidStatus(t.paid, t.money);
             let paidShort = t.paid == null ? '—' : t.paid + ' ₽';
             let paidColor = '';
-            if (status === 'match') paidColor = '#b6ffd0';
-            else if (status === 'less') paidColor = '#ffb6b6';
-            else if (status === 'more') paidColor = '#d5b6ff';
+            if (status === 'match') paidColor = '#1e6b3a';
+            else if (status === 'less') paidColor = '#b02020';
+            else if (status === 'more') paidColor = '#6a2ea0';
 
             el.innerHTML = `
                 <div class="week-header">
@@ -942,28 +948,28 @@
         else if (status === 'more')  { paidBtnClass += ' status-more';  paidBtnText = '↑ ' + t.paid + ' ₽'; }
 
         let diffText = '—';
-        let diffColor = 'rgba(255,255,255,0.85)';
+        let diffColor = '#8a5a5a';
         if (t.diff != null) {
             const sign = t.diff > 0 ? '+' : '';
             diffText = sign + t.diff + ' ₽';
-            if (t.diff === 0) diffColor = '#b6ffd0';
-            else if (t.diff > 0) diffColor = '#d5b6ff';
-            else diffColor = '#ffb6b6';
+            if (t.diff === 0) diffColor = '#1e6b3a';
+            else if (t.diff > 0) diffColor = '#6a2ea0';
+            else diffColor = '#b02020';
         }
 
         let paidNote = '';
         if (t.paidSource === 'days') {
-            paidNote = `<div class="total-line"><span class="k" style="font-size:12px; opacity:0.75;">(сумма оплат по дням)</span><span class="v"></span></div>`;
+            paidNote = `<div class="total-line"><span class="k" style="font-size:12px; opacity:0.7;">(сумма оплат по дням)</span><span class="v"></span></div>`;
         } else if (t.paidSource === 'week') {
-            paidNote = `<div class="total-line"><span class="k" style="font-size:12px; opacity:0.75;">(указано вручную за неделю)</span><span class="v"></span></div>`;
+            paidNote = `<div class="total-line"><span class="k" style="font-size:12px; opacity:0.7;">(указано вручную за неделю)</span><span class="v"></span></div>`;
         }
 
         el.innerHTML = `
             <div class="week-total-title">Итог за неделю</div>
             <div class="total-list">
                 <div class="total-line">
-                    <span class="k">Всего:</span>
-                    <span class="v">${t.cars}</span>
+                    <span class="k">Всего часов:</span>
+                    <span class="v">${t.hours}</span>
                 </div>
                 <div class="total-line">
                     <span class="k">Сумма:</span>
@@ -979,7 +985,7 @@
                     <span class="v" style="color:${diffColor}">${diffText}</span>
                 </div>
             </div>
-            <div class="total-row" style="border-top: 1px solid rgba(255,255,255,0.2); margin-top:12px; padding-top:12px;">
+            <div class="total-row" style="border-top: 1px solid rgba(200, 120, 120, 0.3); margin-top:12px; padding-top:12px;">
                 <span class="total-label">Оплата недели:</span>
                 <button class="${paidBtnClass}" onclick="openPaidWeek(${week.id})">
                     ${paidBtnText}
@@ -998,9 +1004,9 @@
         if (day.closed) {
             const status = getPaidStatus(day.paid, t.money);
             let paidColor = '';
-            if (status === 'match') paidColor = '#b6ffd0';
-            else if (status === 'less') paidColor = '#ffb6b6';
-            else if (status === 'more') paidColor = '#d5b6ff';
+            if (status === 'match') paidColor = '#1e6b3a';
+            else if (status === 'less') paidColor = '#b02020';
+            else if (status === 'more') paidColor = '#6a2ea0';
 
             card.innerHTML = `
                 <div class="day-top">
@@ -1045,33 +1051,33 @@
 
             <div class="shift-row">
                 <span class="shift-label">Ночь</span>
-                <input type="number" class="cars-input" min="0" placeholder="0"
+                <input type="number" class="hours-input" min="0" placeholder="0"
                        value="${day.night || ''}"
-                       oninput="onCarsInput(this, ${weekId}, ${day.id}, 'night')">
-                <span class="cars-word">ед.</span>
+                       oninput="onHoursInput(this, ${weekId}, ${day.id}, 'night')">
+                <span class="hours-word">часов</span>
                 <span class="money">${(day.night || 0) * RATE} ₽</span>
             </div>
             <div class="shift-row">
                 <span class="shift-label">День</span>
-                <input type="number" class="cars-input" min="0" placeholder="0"
+                <input type="number" class="hours-input" min="0" placeholder="0"
                        value="${day.day || ''}"
-                       oninput="onCarsInput(this, ${weekId}, ${day.id}, 'day')">
-                <span class="cars-word">ед.</span>
+                       oninput="onHoursInput(this, ${weekId}, ${day.id}, 'day')">
+                <span class="hours-word">часов</span>
                 <span class="money">${(day.day || 0) * RATE} ₽</span>
             </div>
             <div class="shift-row">
                 <span class="shift-label">Вечер</span>
-                <input type="number" class="cars-input" min="0" placeholder="0"
+                <input type="number" class="hours-input" min="0" placeholder="0"
                        value="${day.evening || ''}"
-                       oninput="onCarsInput(this, ${weekId}, ${day.id}, 'evening')">
-                <span class="cars-word">ед.</span>
+                       oninput="onHoursInput(this, ${weekId}, ${day.id}, 'evening')">
+                <span class="hours-word">часов</span>
                 <span class="money">${(day.evening || 0) * RATE} ₽</span>
             </div>
 
             <div class="total-row">
                 <span class="total-label">Итого за смену:</span>
                 <div class="total-block">
-                    <span class="total-value">${t.cars} ед.</span>
+                    <span class="total-value">${t.hours} часов</span>
                     <span class="total-money">${t.money} ₽</span>
                 </div>
                 <button class="${paidBtnClass}" onclick="openPaidDay(${weekId}, ${day.id})">
@@ -1087,7 +1093,7 @@
         return card;
     }
 
-    function onCarsInput(input, weekId, dayId, field) {
+    function onHoursInput(input, weekId, dayId, field) {
         let val = input.value.replace(/[^0-9]/g, '');
         input.value = val;
         updateDay(weekId, dayId, field, val);
@@ -1104,7 +1110,7 @@
         if (rows[1]) rows[1].textContent = (d.day * RATE) + ' ₽';
         if (rows[2]) rows[2].textContent = (d.evening * RATE) + ' ₽';
 
-        card.querySelector('.total-value').textContent = t.cars + ' ед.';
+        card.querySelector('.total-value').textContent = t.hours + ' часов';
         card.querySelector('.total-money').textContent = t.money + ' ₽';
 
         const paidBtn = card.querySelector('.paid-btn');
